@@ -2,8 +2,8 @@ const path = require('path')
 const express = require('express')
 const compression = require('compression')
 
-module.exports = function addProdMiddlewares (app, options) {
-  const publicPath = options.publicPath || '/'
+module.exports = function addProdMiddlewares(app, options) {
+  const publicPath = options.publicPath || '/cmal-report/'
   const outputPath = options.outputPath || path.resolve(process.cwd(), 'build')
 
   // compression middleware compresses your server responses which makes them

@@ -38,7 +38,7 @@ export const Background: FC = () => {
           ''
         ) : CLIENT_VERSION !== version ? (
           <span className={styles.versionerror}>
-            客户端与服务端版本不一致，请更新
+            客户端{CLIENT_VERSION}与服务端版本{version}不一致，请更新
           </span>
         ) : (
           <>

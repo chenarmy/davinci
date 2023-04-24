@@ -88,12 +88,6 @@ public class WeChatWorkScheduleServiceImpl extends BaseScheduleService implement
             if (imageContentFile.length() > (2 * 1024 * 1024)) {
                 scheduleLogger.info("Image size must be less than 2M, the size is {} !", imageContentFile.length());
 
-                scheduleLogger.info("Image start to compressed!", imageContentFile.getPath());
-                File file = FileUtils.compressedImage(imageContent.getImageFile().getPath());
-
-                scheduleLogger.info("Image compressed successfully! the size is {}.", file.length());
-                imageContent.setImageFile(file);
-
                 scheduleLogger.info("The original image has been replaced with a new image, path:{}!", imageContentFile.getPath());
             }
             

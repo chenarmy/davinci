@@ -20,8 +20,6 @@
 package edp.core.utils;
 
 import com.alibaba.druid.util.StringUtils;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import edp.davinci.core.enums.ActionEnum;
 import edp.davinci.core.enums.FileTypeEnum;
 import edp.davinci.core.enums.LogNameEnum;
@@ -255,59 +253,6 @@ public class FileUtils {
         }finally {
             closeCloseable(out);
         }
-    }
-
-    /**
-     * 图片压缩，图片比例按原比例输出
-     * tips: 压缩后的图片会替换原有的图片
-     * @param filepath
-     */
-    public static File compressedImage(String filepath) {
-        try {
-            File file = new File(filepath);
-            BufferedImage img_dest= null;
-
-            BufferedImage img_src = ImageIO.read(file);
-            int width = img_src.getWidth();
-            int height = img_src.getHeight();
-            long imageLength = file.length();
-
-            // 如果首次压缩图片还大于2M，则继续压缩
-            while (imageLength > (2 * 1024 * 1024)) {
-                // 开始读取文件并进行压缩
-
-                // 压缩模式设置
-                img_dest = new BufferedImage( width,  height, BufferedImage.TYPE_INT_RGB);
-                img_dest.getGraphics().drawImage(img_src.getScaledInstance(width, height, Image.SCALE_SMOOTH), 0, 0, null);
-
-                // 缩小
-                ImageIO.write(img_dest, "jpg", file);
-
-                // 计算图片压缩率
-                float rate = calcCompressedRate(imageLength, file.length());
-                // 如果压缩率小于10%，则不再进行压缩
-                if (rate < 10) {
-                    scheduleLogger.warn("Forced interruption, compression rate is less than {}",rate);
-                    break;
-                }
-
-                imageLength = file.length();
-                scheduleLogger.warn("File size after compression {},Compress again",imageLength);
-            }
-            imageLength = file.length();
-            scheduleLogger.warn("Final compressed file size {}",imageLength);
-
-            FileOutputStream output = new FileOutputStream(filepath);
-            //将图片按JPEG压缩
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(output);
-            encoder.encode(img_dest);
-            output.close();
-
-            return new File(filepath);
-        } catch (Exception e) {
-            scheduleLogger.error("Image compression failed",e);
-        }
-        return null;
     }
 
     /**

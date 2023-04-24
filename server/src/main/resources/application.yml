@@ -15,7 +15,7 @@
 #  >>
 
 davinci:
-  version: 0.3-rc
+  version: 0.3.1-dev
 
 
 file:

@@ -155,7 +155,7 @@ export class Register extends React.PureComponent<IRegisterProps & RouteComponen
             onSignup={this.signUp}
           />
           <p className={styles.tips}>
-            <span>已有davinci账号， </span>
+            <span>已有账号， </span>
             <a href="javascript:;" onClick={this.toLogin}>点击登录</a>
           </p>
         </div>

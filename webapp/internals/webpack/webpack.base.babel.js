@@ -22,7 +22,7 @@ module.exports = options => ({
     {
       // Compile into js/build.js
       path: path.resolve(process.cwd(), 'build'),
-      publicPath: '/'
+      publicPath: '/cmal-report/'
     },
     options.output
   ), // Merge with env dependent settings
