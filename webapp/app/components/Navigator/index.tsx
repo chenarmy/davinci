@@ -105,12 +105,6 @@ export function Navigator (props: INavigatorProps) {
           />
         </li>
         <li>
-          <Icon type="file-text" onClick={goDoc} />
-        </li>
-        <li>
-          <Icon type="github" onClick={goGithub}/>
-        </li>
-        <li>
           <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
             <Icon type="user" />
           </Dropdown>
